@@ -11,7 +11,26 @@
 |
 */
 
+//member module
+//register PAGE
+Route::get('/register','\App\http\Controllers\RegisterController@index');
+//register action
+Route::post('/register','\App\http\Controllers\RegisterController@register');
+//login PAGE
+Route::get('/login','\App\http\Controllers\loginController@index');
+//login
+Route::post('/login','\App\http\Controllers\loginController@login');
+//logout
+Route::get('/logout','\App\http\Controllers\loginController@logout');
+//profile setting
+Route::get('/user/me/setting','\App\http\Controllers\UserController@setting');
+//profile setting process
+Route::post('/user/me/setting','\App\http\Controllers\UserController@settingStore');
 
+
+Route::get('/',function(){
+	return view('welcome');
+});
 //list
 Route::get('/posts','\App\http\Controllers\PostController@index');
 //Route::get('/posts','PoestController@index');

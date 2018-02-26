@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use Illuminate\Http\Request;
-use \App\Post;
+use App\Post;
 //use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
@@ -11,10 +12,11 @@ class PostController extends Controller
 	//list
 	public function index()
 	{
+		//依赖注入
 		$app = app();
 		$log= $app->make('log');
 		$log->info("post_index",['data' => 'this is post index']);
-		$posts = Post::orderBy('created_at','desc')->paginate(6);
+		$posts = Post::orderBy('created_at','desc')->withCount(['zans','comments'])->paginate(6);
 		return view('post/index',compact('posts'));
 	}
 
@@ -22,6 +24,7 @@ class PostController extends Controller
 	public function show(Post $post)
 	{
 //		dd($post);
+		$post->load('comments');
 		return view('post/show',compact('post'));
 	}
 
@@ -41,7 +44,11 @@ class PostController extends Controller
 		],[
 			'title.min' => 'the length of article is too short',
 		]);
-		$post = Post::create(request(['title','content']));
+
+		$user_id = \Auth::id();
+		$params = array_merge(request(['title','content']),compact('user_id'));
+
+		$post = Post::create($params);
 		return redirect("/posts");
 //		return view('post/create');
 	}
@@ -61,7 +68,8 @@ class PostController extends Controller
 		],[
 			'title.min' => 'the length of article is too short',
 		]);
-//		$post->title = \request('title');
+
+		$this->authorize('update', $post);
 		$post->content = \request('content');
 		$post->title = $request->title;
 //		$post->content = $request->content;
@@ -73,8 +81,7 @@ class PostController extends Controller
 	//delete
 	public function delete(Post $post)
 	{
-//		dd($post);
-//		return view('post/create');
+		$this->authorize('delete',$post);
 		$post->delete();
 		return redirect("/posts");
 	}
@@ -85,6 +92,40 @@ class PostController extends Controller
 		return asset('storage/'.$path);
 //
 //		return view('post/create');
+	}
+
+	public function comment(Post $post)
+	{
+		$this->validate(request(),[
+			'content' => 'required|min:3',
+		]);
+
+		$comment = new Comment();
+		$comment->user_id = \Auth::id();
+		$comment->content = request('content');
+		$post->comments()->save($comment);
+
+		//back to original page
+		return back();
+
+	}
+
+	public function zan(Post $post)
+	{
+		$zan = new \App\Zan;
+		$zan->user_id = \Auth::id();
+		$post->zans()->save($zan);
+		return back();
+	}
+
+	/*
+	 * 取消点赞
+	 */
+	public function unzan(Post $post)
+	{
+//		dd($post->zan(\Auth::id()));
+		$post->zan(\Auth::id())->delete();
+		return back();
 	}
 
 }

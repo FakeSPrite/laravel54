@@ -12,6 +12,7 @@
 */
 
 //member module
+
 //register PAGE
 Route::get('/register','\App\http\Controllers\RegisterController@index');
 //register action
@@ -52,3 +53,15 @@ Route::get('/posts/{post}/delete','\App\http\Controllers\PostController@delete')
 //detail
 Route::get('/posts/{post}','\App\http\Controllers\PostController@show');
 Route::post('/posts/image/upload','\App\http\Controllers\PostController@imageUpload');
+Route::post('/posts/{post}/comment','\App\http\Controllers\PostController@comment');
+
+//zan
+Route::get('/posts/{post}/zan', '\App\Http\Controllers\PostController@zan');
+Route::get('/posts/{post}/unzan', '\App\Http\Controllers\PostController@unzan');
+
+//profile
+Route::get('/user/{user}', '\App\Http\Controllers\UserController@show');
+
+//fan
+Route::get('/user/{user}/zan', '\App\Http\Controllers\PostController@fan');
+Route::get('/user/{user}/unfan', '\App\Http\Controllers\PostController@unfan');

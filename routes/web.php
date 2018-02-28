@@ -43,6 +43,8 @@ Route::get('/posts','\App\http\Controllers\PostController@index');
 Route::get('/posts/create','\App\http\Controllers\PostController@create');
 Route::post('/posts','\App\http\Controllers\PostController@store');
 
+Route::get('/posts/search', '\App\Http\Controllers\PostController@search');
+
 //edit article
 Route::get('/posts/{post}/edit','\App\http\Controllers\PostController@edit');
 Route::put('/posts/{post}','\App\http\Controllers\PostController@update');
@@ -63,5 +65,7 @@ Route::get('/posts/{post}/unzan', '\App\Http\Controllers\PostController@unzan');
 Route::get('/user/{user}', '\App\Http\Controllers\UserController@show');
 
 //fan
-Route::get('/user/{user}/zan', '\App\Http\Controllers\PostController@fan');
+Route::get('/user/{user}/fan', '\App\Http\Controllers\PostController@fan');
 Route::get('/user/{user}/unfan', '\App\Http\Controllers\PostController@unfan');
+
+

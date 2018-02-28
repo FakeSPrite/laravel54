@@ -4,8 +4,28 @@ namespace App;
 
 use App\Model;
 
+use Laravel\Scout\Searchable;
+
 class Post extends Model
 {
+	use Searchable;
+
+
+	//define type in the index
+	public function searchableAs()
+	{
+		return "post";
+	}
+
+	//define which words to be search
+	public function toSearchableArray()
+	{
+		return [
+			'title' => $this->title,
+			'content' => $this->content,
+		];
+	}
+
 	protected $guarded=[];// not fillable feilds
 //	protected $fillable = ['title', 'content'];
 

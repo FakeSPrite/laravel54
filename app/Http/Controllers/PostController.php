@@ -12,12 +12,14 @@ class PostController extends Controller
 	//list
 	public function index()
 	{
+
+		$user = \Auth::user();
 		//依赖注入
 		$app = app();
 		$log= $app->make('log');
 		$log->info("post_index",['data' => 'this is post index']);
 		$posts = Post::orderBy('created_at','desc')->withCount(['zans','comments'])->paginate(6);
-		return view('post/index',compact('posts'));
+		return view('post/index',compact('posts','user'));
 	}
 
 	//show
@@ -31,8 +33,9 @@ class PostController extends Controller
 	//create
 	public function create()
 	{
-//		print_r('dsds');
-		return view('post/create');
+//		print_r('dsds');.
+		$user = \Auth::user();
+		return view('post/create',compact('user'));
 	}
 
 	//store
@@ -126,6 +129,18 @@ class PostController extends Controller
 //		dd($post->zan(\Auth::id()));
 		$post->zan(\Auth::id())->delete();
 		return back();
+	}
+
+	public function search()
+	{
+		$this->validate(request(),[
+			'query' => 'required'
+		]);
+
+		$query = request('query');
+		$posts = Post::search(request('query'))->paginate(2);
+//		dd($posts);
+		return view('post/search', compact('posts', 'query'));
 	}
 
 }

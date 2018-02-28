@@ -56,7 +56,7 @@
 
             <!-- List group -->
             <ul class="list-group">
-                <form action="/posts/comment" method="post"><!--/{$post->id}-->
+                <form action="/posts/{{$post->id}}/comment" method="post"><!--/{$post->id}-->
                     {{csrf_field()}}
                     <input type="hidden" name="post_id" value="{{$post->id}}"/>
                     <li class="list-group-item">

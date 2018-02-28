@@ -19,7 +19,7 @@ class ESInit extends Command
 	 *
 	 * @var string
 	 */
-	protected $description = 'init es';
+	protected $description = 'init laravel es for post';
 
 	/**
 	 * Create a new command instance.
@@ -41,6 +41,7 @@ class ESInit extends Command
 		$client = new Client();
 		// 创建模版
 		$url = config('scout.elasticsearch.hosts')[0] . '/_template/tmp';
+//		$client->delete($url);
 		$client->put($url, [
 			'json' => [
 				'template' => config('scout.elasticsearch.index'),
@@ -73,8 +74,9 @@ class ESInit extends Command
 				]
 			]
 		]);
-
+		$this->info("========== template create successfully ==============");
 		$url = config('scout.elasticsearch.hosts')[0] . '/' . config('scout.elasticsearch.index');
+//		$client->delete($url);
 		$client->put($url, [
 			'json' => [
 				'settings' => [
@@ -91,6 +93,7 @@ class ESInit extends Command
 				]
 			]
 		]);
+		$this->info("========== index create successfully ==============");
 
 	}
 }

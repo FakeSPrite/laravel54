@@ -6,7 +6,7 @@
                 {{method_field('PUT')}}
                 {{csrf_field()}}
                 <input type="hidden" name="_method" value="PUT">
-                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                {{--<input type="hidden" name="_token" value="{{csrf_token()}}">--}}
                 <div class="form-group">
                     <label>标题</label>
                     <input name="title" type="text" class="form-control" placeholder="这里是标题" value="{{$post->title}}">

@@ -4,8 +4,8 @@ $.ajaxSetup({
     }
 });
 
-$(".like-button").click(function(event){
-    target = $(event.target)
+/*$(".like-button").click(function(event){
+    target = $(event.target);
     var current_like = target.attr("like-value");
     var user_id = target.attr("like-user");
     //var _token = target.attr("_token");
@@ -29,7 +29,7 @@ $(".like-button").click(function(event){
             }
         );
     } else {
-        // 取消关注
+        // 关注
         $.ajax({
                 url: "/user/" + user_id + "/fan",
                 method: "POST",
@@ -47,4 +47,4 @@ $(".like-button").click(function(event){
             }
         );
     }
-});
+});*/

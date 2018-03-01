@@ -23,6 +23,8 @@ Route::get('/login','\App\http\Controllers\loginController@index');
 Route::post('/login','\App\http\Controllers\loginController@login');
 //logout
 Route::get('/logout','\App\http\Controllers\loginController@logout');
+
+
 //profile setting
 Route::get('/user/me/setting','\App\http\Controllers\UserController@setting');
 //profile setting process
@@ -65,7 +67,7 @@ Route::get('/posts/{post}/unzan', '\App\Http\Controllers\PostController@unzan');
 Route::get('/user/{user}', '\App\Http\Controllers\UserController@show');
 
 //fan
-Route::get('/user/{user}/fan', '\App\Http\Controllers\PostController@fan');
-Route::get('/user/{user}/unfan', '\App\Http\Controllers\PostController@unfan');
+Route::post('/user/{user}/fan', '\App\Http\Controllers\UserController@fan');
+Route::post('/user/{user}/unfan', '\App\Http\Controllers\UserController@unfan');
 
 

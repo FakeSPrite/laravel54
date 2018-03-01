@@ -21,7 +21,6 @@ class UserController extends Controller
 	{
 		//personal information,follow,fans,articles
 		$user = User::withCount(['stars','fans','posts'])->find($user->id);
-//dd($user);
 		//article list,first 10
 		$posts = $user->posts()->orderBy('created_at','desc')->take(10)->get();
 
@@ -42,11 +41,18 @@ class UserController extends Controller
 	{
 		$me = \Auth::user();//get current user
 		$me->doFan($user->id);
-		return;
+
+		return [
+			'error' =>0,
+			'msg' => ''];
 	}
 
 	public function unfan(User $user)
 	{
-		return;
+		$me = \Auth::user();//get current user
+		$me->doUnFan($user->id);
+		return [
+			'error' =>0,
+			'msg' => ''];
 	}
 }

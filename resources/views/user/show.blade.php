@@ -2,11 +2,12 @@
 @section("content")
         <div class="col-sm-8">
             <blockquote>
-                <p><img src="{{$user->avatar}}" alt="" class="img-rounded" style="border-radius:500px; height: 40px"> Kassandra Ankunding2
+                <p><img src="{{$user->avatar}}" alt="" class="img-rounded" style="border-radius:500px; height: 40px"> {{$user->name}}
                 </p>
 
 
                 <footer>关注：{{$user->stars_count}}｜粉丝：{{$user->fans_count}}｜文章：{{$user->posts_count}}</footer>
+                @include('user.badges.like',['target_user'=>$user])
             </blockquote>
         </div>
         <div class="col-sm-8 blog-main">
@@ -18,53 +19,33 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab_1">
+                        @foreach($posts as $post)
                         <div class="blog-post" style="margin-top: 30px">
-                            <p class=""><a href="/user/5">Kassandra Ankunding2</a> 6天前</p>
-                            <p class=""><a href="/posts/62" >你好你好</a></p>
-
-
-                            <p><p>你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好...</p>
+                            <p class=""><a href="/user/{{$post->user->id}}">{{$post->user->name}}</a> {{$post->created_at->diffForHumans()}}</p>
+                            <p class=""><a href="/posts/{{$post->id}}" >{{$post->title}}</a></p>
+                            <p>{!! str_limit($post->content,100,'...') !!}</p>
                         </div>
+                        @endforeach
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_2">
+                        @foreach($susers as $user)
                         <div class="blog-post" style="margin-top: 30px">
-                            <p class="">Jadyn Medhurst Jr.</p>
-                            <p class="">关注：1 | 粉丝：1｜ 文章：0</p>
-
-                            <div>
-                                <button class="btn btn-default like-button" like-value="1" like-user="6" _token="MESUY3topeHgvFqsy9EcM916UWQq6khiGHM91wHy" type="button">取消关注</button>
-                            </div>
-
+                            <p class="">{{$user->name}}</p>
+                            <p class="">关注：{{$user->stars_count}} | 粉丝：{{$user->fans_count}}｜ 文章：{{$user->posts_count}}</p>
+                            @include('user.badges.like',['target_user'=>$user])
                         </div>
-                        <div class="blog-post" style="margin-top: 30px">
-                            <p class="">Mrs. Felicita D&#039;Amore DVM</p>
-                            <p class="">关注：0 | 粉丝：1｜ 文章：1</p>
-
-                            <div>
-                                <button class="btn btn-default like-button" like-value="1" like-user="55" _token="MESUY3topeHgvFqsy9EcM916UWQq6khiGHM91wHy" type="button">取消关注</button>
-                            </div>
-
-                        </div>
-                        <div class="blog-post" style="margin-top: 30px">
-                            <p class="">Maybell VonRueden</p>
-                            <p class="">关注：0 | 粉丝：2｜ 文章：0</p>
-
-                            <div>
-                                <button class="btn btn-default like-button" like-value="1" like-user="3" _token="MESUY3topeHgvFqsy9EcM916UWQq6khiGHM91wHy" type="button">取消关注</button>
-                            </div>
-
-                        </div>
-                        <div class="blog-post" style="margin-top: 30px">
-                            <p class="">Miss Melyssa Bogan DDS</p>
-                            <p class="">关注：2 | 粉丝：2｜ 文章：3</p>
-
-    @include('user.badges.like',['target_user'=>$user])
-
-                        </div>
+                        @endforeach
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_3">
+                        @foreach($fusers as $user)
+                            <div class="blog-post" style="margin-top: 30px">
+                                <p class="">{{$user->name}}</p>
+                                <p class="">关注：{{$user->stars_count}} | 粉丝：{{$user->fans_count}}｜ 文章：{{$user->posts_count}}</p>
+                                @include('user.badges.like',['target_user'=>$user])
+                            </div>
+                        @endforeach
                     </div>
                     <!-- /.tab-pane -->
                 </div>

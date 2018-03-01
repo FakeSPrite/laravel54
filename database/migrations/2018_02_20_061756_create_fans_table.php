@@ -15,8 +15,8 @@ class CreateFansTable extends Migration
     {
 	    Schema::create('fans', function (Blueprint $table) {
 		    $table->increments('id');
-		    $table->integer('fan_id');
-		    $table->integer('star_id');
+		    $table->integer('fan_id')->default(0);
+		    $table->integer('star_id')->default(0);
 		    $table->timestamps();
 	    });
     }

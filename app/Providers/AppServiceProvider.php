@@ -16,6 +16,12 @@ class AppServiceProvider extends ServiceProvider
     {
 //        Schema::defaultStringLength(191);
         Schema::defaultStringLength(191);
+        \View::composer('layout.sidebar', function ($view){
+
+        	$topics = \App\Topic::all();
+
+        	$view->with('topics',$topics);
+        });
     }
 
     /**
@@ -27,4 +33,5 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+
 }

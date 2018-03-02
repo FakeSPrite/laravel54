@@ -70,4 +70,7 @@ Route::get('/user/{user}', '\App\Http\Controllers\UserController@show');
 Route::post('/user/{user}/fan', '\App\Http\Controllers\UserController@fan');
 Route::post('/user/{user}/unfan', '\App\Http\Controllers\UserController@unfan');
 
+//topic
+Route::get('/topic/{topic}', '\App\Http\Controllers\TopicController@show');
+Route::post('/topic/{topic}/submit', '\App\Http\Controllers\TopicController@submit');
 

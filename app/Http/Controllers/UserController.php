@@ -21,6 +21,7 @@ class UserController extends Controller
 	{
 		//personal information,follow,fans,articles
 		$user = User::withCount(['stars','fans','posts'])->find($user->id);
+
 		//article list,first 10
 		$posts = $user->posts()->orderBy('created_at','desc')->take(10)->get();
 

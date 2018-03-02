@@ -55,4 +55,23 @@ class Post extends Model
 	{
 		return $this->hasOne(\App\Zan::class)->where('user_id', $user_id);
 	}
+
+	//scope: article belongs to some author
+	public function scopeAuthorBy(Builder $query, $user_id)
+	{
+		return $query->where('user_id',$user_id);
+	}
+
+	public function postTopics()
+	{
+		return $this->hasMany(\App\PostTopics::class,'post_id','id');
+	}
+
+
+	public function scopeTopicNotBy (Builder $query, $topic_id)
+	{
+		return $query->doesntHave();
+	}
+
+//$users = App\User::popular()->active()->orderBy('created_at')->get();
 }

@@ -71,6 +71,10 @@ Route::post('/user/{user}/fan', '\App\Http\Controllers\UserController@fan');
 Route::post('/user/{user}/unfan', '\App\Http\Controllers\UserController@unfan');
 
 //topic
-Route::get('/topic/{topic}', '\App\Http\Controllers\TopicController@show');
-Route::post('/topic/{topic}/submit', '\App\Http\Controllers\TopicController@submit');
 
+/*topic detail*/
+Route::get('/topic/{topic}', '\App\Http\Controllers\TopicController@show');
+/*submit posts*/
+Route::get('/topic/{topic}/submit', '\App\Http\Controllers\TopicController@submit');
+
+include_once("admin.php");

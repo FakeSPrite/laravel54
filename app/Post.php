@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Model;
-
+use Illuminate\Database\Eloquent\Builder;
 use Laravel\Scout\Searchable;
 
 class Post extends Model
@@ -64,13 +64,15 @@ class Post extends Model
 
 	public function postTopics()
 	{
-		return $this->hasMany(\App\PostTopics::class,'post_id','id');
+		return $this->hasMany(\App\PostTopic::class,'post_id','id');
 	}
 
 
 	public function scopeTopicNotBy (Builder $query, $topic_id)
 	{
-		return $query->doesntHave();
+		return $query->doesntHave('PostTopics','and',function ($q) use($topic_id){
+			$q->where('topic_id',$topic_id );
+		});
 	}
 
 //$users = App\User::popular()->active()->orderBy('created_at')->get();

@@ -11,7 +11,7 @@ Route::group(['prefix' => 'admin'], function() {
 		Route::get('/home', '\App\Admin\Controllers\HomeController@index');
 
 		// 系统管理
-		Route::group(['middleware' => 'can:system'], function(){
+		/*Route::group(['middleware' => 'can:system'], function(){
 			// 用户管理
 			Route::get('/users', '\App\Admin\Controllers\UserController@index');
 			Route::get('/users/create', '\App\Admin\Controllers\UserController@create');
@@ -51,6 +51,6 @@ Route::group(['prefix' => 'admin'], function() {
 			Route::resource('notices', '\App\Admin\Controllers\NoticeController', [
 				'only' => ['index', 'create', 'store'],
 			]);
-		});
+		});*/
 	});
 });

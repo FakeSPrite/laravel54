@@ -44,15 +44,15 @@
 
     @include("admin.layout.header")
     <!-- Left side column. contains the logo and sidebar -->
-    @include("admin.layout.sidebar")
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    {{--@include("admin.layout.sidebar")--}}
+    {{--<!-- Content Wrapper. Contains page content -->--}}
+    {{--<div class="content-wrapper">--}}
 
-        @yield("content")
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-    @include("admin.layout.footer")
+        {{--@yield("content")--}}
+        {{--<!-- /.content -->--}}
+    {{--</div>--}}
+    {{--<!-- /.content-wrapper -->--}}
+    {{--@include("admin.layout.footer")--}}
     <!-- /.control-sidebar -->
     <!-- Add the sidebar's background. This div must be placed
          immediately after the control sidebar -->
